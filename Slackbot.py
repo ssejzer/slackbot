@@ -1,14 +1,17 @@
 import os
-from slackclient import SlackClient
+import slack
 import boto3
 from flask import abort, Flask, jsonify, request
-from zappa.async import task
+#from zappa.async import task
+from zappa.asynchronous import task
 import json
 
 app = Flask(__name__)
 
 # instantiate Slack client
-slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+slack_token = os.environ["SLACK_API_TOKEN"]
+slack_client = slack.RTMClient(token=slack_token)
+#slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 # Set up cloudwatch client to pull metrics
 cw = boto3.client('cloudwatch',

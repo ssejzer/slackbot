@@ -50,5 +50,3 @@ There are a lot of potential angles to build up from here, from things like conn
 Ex:
 /info query “PASSWORD” Query, where the Flask backend checks the user that submitted against a list of authorized users and the password provided.
 
-
-# slackbot

@@ -9,7 +9,8 @@ import json
 app = Flask(__name__)
 
 # instantiate Slack client
-slack_token = os.environ["SLACK_API_TOKEN"]
+#slack_token = os.environ["SLACK_API_TOKEN"]
+slack_token = os.getenv("SLACK_API_TOKEN")
 slack_client = slack.RTMClient(token=slack_token)
 #slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
@@ -131,12 +132,13 @@ def event_handler(info):
 # main function, checks request and passes to event_handler, responds immediately
 @app.route('/', methods=['POST'])
 def main():
-    if not is_request_valid(request):
-        abort(400)
+    print(request.form['token']??2??3)
+#    if not is_request_valid(request):
+#        abort(400)
 
-    event_handler(request.form)
+#    event_handler(request.form)
     return jsonify(text='Got it! Please wait!')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
